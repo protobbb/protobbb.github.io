@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta name="msvalidate.01" content="90BB7A119C8E6C6FB528374E8B28DBB8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Angular,Output,EventEmitter,Event">
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1">
+
+
+
+
+  <meta property="fb:admins" content="fb267234890438499">
+  <meta property="fb:app_id" content="267234890438499">
+
+
+
+<meta name="description" content="事件 (EventEmitter)事件繫結 (Event Binding)事件(Event) 可以說是一種狀態的描述，它提供一個主動通知的機制，讓我們可以在發生的當下去做一些額外的處理，例如：按下按鈕，這應該是我們最常用了事件，在點擊按鈕後我們可能儲存目前資訊、切換目前頁面、顯示額外訊息…等等。在 Angular UI：標題列 我們從官方範例一起複製了一段代碼-(click)=&amp;quot;side">
+<meta name="keywords" content="Angular,Output,EventEmitter,Event">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Angular 事件">
+<meta property="og:url" content="https://jonny-huang.github.io/angular/training/13_angular_event/index.html">
+<meta property="og:site_name" content="Jonny Huang 的學習筆記">
+<meta property="og:description" content="事件 (EventEmitter)事件繫結 (Event Binding)事件(Event) 可以說是一種狀態的描述，它提供一個主動通知的機制，讓我們可以在發生的當下去做一些額外的處理，例如：按下按鈕，這應該是我們最常用了事件，在點擊按鈕後我們可能儲存目前資訊、切換目前頁面、顯示額外訊息…等等。在 Angular UI：標題列 我們從官方範例一起複製了一段代碼-(click)=&amp;quot;side">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://jonny-huang.github.io/images/angular/training/event/angular_event_01.png">
+<meta property="og:image" content="https://jonny-huang.github.io/images/angular/training/event/angular_event_02.gif">
+<meta property="og:image" content="https://jonny-huang.github.io/images/angular/training/event/angular_event_03.gif">
+<meta property="og:image" content="https://jonny-huang.github.io/images/download.png">
+<meta property="og:updated_time" content="2017-09-12T03:39:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Angular 事件">
+<meta name="twitter:description" content="事件 (EventEmitter)事件繫結 (Event Binding)事件(Event) 可以說是一種狀態的描述，它提供一個主動通知的機制，讓我們可以在發生的當下去做一些額外的處理，例如：按下按鈕，這應該是我們最常用了事件，在點擊按鈕後我們可能儲存目前資訊、切換目前頁面、顯示額外訊息…等等。在 Angular UI：標題列 我們從官方範例一起複製了一段代碼-(click)=&amp;quot;side">
+<meta name="twitter:image" content="https://jonny-huang.github.io/images/angular/training/event/angular_event_01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Jonny'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://jonny-huang.github.io/angular/training/13_angular_event/">
+
+
+
+
+
+  <title>Angular 事件 | Jonny Huang 的學習筆記</title>
+  
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '267234890438499',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/zh_tw/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Jonny Huang 的學習筆記</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Angular、Flutter</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            目錄
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-flutter">
+          <a href="/flutter/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Flutter
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-angular">
+          <a href="/angular/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Angular
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-quotes">
+          <a href="/quotes/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-commenting"></i> <br>
+            
+            欣雨露
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://jonny-huang.github.io/angular/training/13_angular_event/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jonny Huang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jonny Huang 的學習筆記">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Angular 事件</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2017-09-12T11:39:02+08:00">
+                2017/09/12
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Training/" itemprop="url" rel="index">
+                    <span itemprop="name">Training</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="事件-EventEmitter"><a href="#事件-EventEmitter" class="headerlink" title="事件 (EventEmitter)"></a>事件 (EventEmitter)</h1><h2 id="事件繫結-Event-Binding"><a href="#事件繫結-Event-Binding" class="headerlink" title="事件繫結 (Event Binding)"></a>事件繫結 (Event Binding)</h2><p><strong>事件(Event)</strong> 可以說是一種<strong>狀態</strong>的描述，它提供一個主動通知的機制，讓我們可以在發生的當下去做一些額外的處理，例如：<strong>按下按鈕</strong>，這應該是我們最常用了事件，在點擊按鈕後我們可能儲存目前資訊、切換目前頁面、顯示額外訊息…等等。<br>在 <a href="/angular/training/12_angular_ui_header/">Angular UI：標題列</a> 我們從<a href="https://material.angular.io/components/sidenav/overview" target="_blank" rel="noopener"><strong>官方範例</strong></a>一起複製了一段代碼-<code>(click)=&quot;sidenav.open()&quot;</code>，看起來就像是點擊事件，但是又跟 DOM 的點擊事件(<code>onclick</code>)比起來少了最前面的 <code>on</code> 多了小括弧。  </p>
+<blockquote>
+<p>Angular 內建透過指令(Directive)方式產生了相對應 DOM 事件的 <strong>偽事件</strong> (不是正確觀念，但是這樣說好像比較好理解)， 它本身會去監控 DOM 的事件，當 DOM 事件觸發時在去觸發對應的 <strong>偽事件</strong>，初期我們可以直接把它當作 DOM 事件來看待，只是寫法上稍做調整。<br><strong>小括號</strong> 其實是 Angular <strong>單向繫結</strong>(<strong>事件繫結</strong>)的語法，透過繫結方式讓 <strong>前端樣板</strong>(xxx<strong>.component.html</strong>) 的變化( <strong>偽事件</strong>的觸發) 可以反應回 <strong>後端元件</strong>(xxx<strong>.component.ts</strong>)。</p>
+</blockquote>
+<p><img src="/images/angular/training/event/angular_event_01.png" alt="">  </p>
+<h2 id="建立自訂事件"><a href="#建立自訂事件" class="headerlink" title="建立自訂事件"></a>建立自訂事件</h2><p>我們在 <code>src\app\home\header\header.component.ts</code> 內宣告一個<strong>事件觸發器</strong>(<strong>EventEmitter</strong>)，並透過 <code>@Output()</code> 這個裝飾器將它提供給外部引用，並建立一個 sidenav_click 方法來觸發 <strong>EventEmitter</strong>。  </p>
+<blockquote>
+<p><code>@Output()</code> 可以加入別名參數，外部會引用到此別名，它會直接對應到原本的參數，預設別名與參數相同，一般除非是特別規畫過，否則直接使用預設值在維護上會比較方便。</p>
+</blockquote>
+<pre><code>import { Component, OnInit, Output, EventEmitter} from &#39;@angular&#x2F;core&#39;;
+
+@Component({
+  selector: &#39;app-header&#39;,
+  templateUrl: &#39;.&#x2F;header.component.html&#39;,
+  styleUrls: [&#39;.&#x2F;header.component.scss&#39;]
+})
+export class HeaderComponent implements OnInit {
+  @Output() sidenavClick = new EventEmitter();
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  sidenav_click() {
+    this.sidenavClick.emit(null);
+  }
+}
+</code></pre>
+<p>開啟 <code>src\app\home\header\header.component.html</code> 將 menu 按鈕複製過來，將 <code>click</code> 改連結到 <code>sidenav_click</code> 方法，這樣 <strong>HeaderComponent</strong> 就多了一個 <strong>sidenavClick</strong> 的事件。  </p>
+<pre><code>&lt;md-toolbar color=&quot;primary&quot;&gt;
+  &lt;button md-icon-button (click)=&quot;sidenav_click()&quot; fxHide fxShow.xs&gt;
+    &lt;md-icon&gt;menu&lt;&#x2F;md-icon&gt;
+  &lt;&#x2F;button&gt;
+  &lt;span&gt;Angular demo&lt;&#x2F;span&gt;
+  &lt;span fxFlex&gt;&lt;&#x2F;span&gt;
+  &lt;button md-icon-button mdTooltip=&quot;首頁&quot; routerLink=&quot;&#x2F;home&quot;&gt;
+    &lt;md-icon&gt;home&lt;&#x2F;md-icon&gt;
+  &lt;&#x2F;button&gt;
+  &lt;button md-icon-button mdTooltip=&quot;設定&quot;&gt;
+    &lt;md-icon&gt;settings_input_component&lt;&#x2F;md-icon&gt;
+  &lt;&#x2F;button&gt;
+  &lt;button md-icon-button mdTooltip=&quot;關於&quot;&gt;
+    &lt;md-icon&gt;info&lt;&#x2F;md-icon&gt;
+  &lt;&#x2F;button&gt;
+&lt;&#x2F;md-toolbar&gt;
+</code></pre>
+<p>開啟 <code>src\app\home\home.component.html</code>，移除 menu 按鈕，並將 <code>sidenav.open()</code> 繫結至 <strong>HeaderComponent</strong> 的 <strong>sidenavClick</strong>。  </p>
+<pre><code>&lt;div fxFill fxLayout=&quot;column&quot; class=&quot;layout&quot;&gt;
+  &lt;div class=&quot;header&quot; fxLayout=&quot;row&quot;&gt;
+    &lt;!-- &lt;button md-icon-button (click)=&quot;sidenav.open()&quot; fxHide fxShow.xs&gt;
+      &lt;md-icon&gt;menu&lt;&#x2F;md-icon&gt;
+    &lt;&#x2F;button&gt; --&gt;
+    &lt;app-header fxFlex (sidenavClick)=&quot;sidenav.open()&quot;&gt;&lt;&#x2F;app-header&gt;
+  &lt;&#x2F;div&gt;
+  &lt;div fxFlex fxLayout=&quot;row&quot; class=&quot;main&quot;&gt;
+    &lt;div fxFlex=&quot;200px&quot; class=&quot;aside&quot; fxHide.xs&gt;
+      &lt;app-aside&gt;&lt;&#x2F;app-aside&gt;
+    &lt;&#x2F;div&gt;
+    &lt;md-sidenav-container fxFlex&gt;
+      &lt;md-sidenav #sidenav mode=&quot;over&quot; class=&quot;aside&quot; fxHide fxShow.xs&gt;
+        &lt;app-aside fxFlex=&quot;200px&quot;&gt;&lt;&#x2F;app-aside&gt;
+      &lt;&#x2F;md-sidenav&gt;
+      &lt;div fxFlex class=&quot;content&quot;&gt;
+        &lt;router-outlet&gt;&lt;&#x2F;router-outlet&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;md-sidenav-container&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;
+</code></pre>
+<p>以手機尺寸執行瀏覽器查看結果。<br><img src="/images/angular/training/event/angular_event_02.gif" alt="">  </p>
+<p>同樣方式我們在 <strong>AsideComponent</strong> 元件內建立一個 <strong>menuClick</strong> 事件，並讓它在點選功能選單時觸發。  </p>
+<pre><code>import { Component, OnInit, Output, EventEmitter } from &#39;@angular&#x2F;core&#39;;
+
+@Component({
+  selector: &#39;app-aside&#39;,
+  templateUrl: &#39;.&#x2F;aside.component.html&#39;,
+  styleUrls: [&#39;.&#x2F;aside.component.scss&#39;]
+})
+export class AsideComponent implements OnInit {
+  @Output() menuClick = new EventEmitter();
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+  menu_click() {
+    this.menuClick.emit(null);
+  }
+}
+</code></pre>
+<pre><code>&lt;md-list&gt;
+  &lt;h3 md-subheader&gt;員工專區&lt;&#x2F;h3&gt;
+  &lt;button md-button routerLink=&quot;.&#x2F;calendar&quot; (click)=&quot;menu_click()&quot;&gt;
+    &lt;md-list-item&gt;
+      &lt;md-icon md-list-icon&gt;today&lt;&#x2F;md-icon&gt;
+      &lt;h4 md-line&gt;行 事 曆&lt;&#x2F;h4&gt;
+    &lt;&#x2F;md-list-item&gt;
+  &lt;&#x2F;button&gt;
+  &lt;button md-button routerLink=&quot;.&#x2F;address-book&quot; (click)=&quot;menu_click()&quot;&gt;
+    &lt;md-list-item&gt;
+      &lt;md-icon md-list-icon&gt;contact_phone&lt;&#x2F;md-icon&gt;
+      &lt;h4 md-line&gt;通 訊 錄&lt;&#x2F;h4&gt;
+    &lt;&#x2F;md-list-item&gt;
+  &lt;&#x2F;button&gt;
+  &lt;button md-button routerLink=&quot;.&#x2F;logbook&quot; (click)=&quot;menu_click()&quot;&gt;
+    &lt;md-list-item&gt;
+      &lt;md-icon md-list-icon&gt;border_color&lt;&#x2F;md-icon&gt;
+      &lt;h4 md-line&gt;工作日誌&lt;&#x2F;h4&gt;
+    &lt;&#x2F;md-list-item&gt;
+  &lt;&#x2F;button&gt;
+  &lt;button md-button routerLink=&quot;.&#x2F;to-do-list&quot; (click)=&quot;menu_click()&quot;&gt;
+    &lt;md-list-item&gt;
+      &lt;md-icon md-list-icon&gt;playlist_add_check&lt;&#x2F;md-icon&gt;
+      &lt;h4 md-line&gt;待辦事項&lt;&#x2F;h4&gt;
+    &lt;&#x2F;md-list-item&gt;
+  &lt;&#x2F;button&gt;
+  &lt;button md-button routerLink=&quot;.&#x2F;file&quot; (click)=&quot;menu_click()&quot;&gt;
+    &lt;md-list-item&gt;
+      &lt;md-icon md-list-icon&gt;cloud_download&lt;&#x2F;md-icon&gt;
+      &lt;h4 md-line&gt;檔案下載&lt;&#x2F;h4&gt;
+    &lt;&#x2F;md-list-item&gt;
+  &lt;&#x2F;button&gt;
+  &lt;button md-button routerLink=&quot;.&#x2F;leave&quot; (click)=&quot;menu_click()&quot;&gt;
+    &lt;md-list-item&gt;
+      &lt;md-icon md-list-icon&gt;weekend&lt;&#x2F;md-icon&gt;
+      &lt;h4 md-line&gt;請  假&lt;&#x2F;h4&gt;
+    &lt;&#x2F;md-list-item&gt;
+  &lt;&#x2F;button&gt;
+  &lt;button md-button routerLink=&quot;.&#x2F;reimburse&quot; (click)=&quot;menu_click()&quot;&gt;
+    &lt;md-list-item&gt;
+      &lt;md-icon md-list-icon&gt;attach_money&lt;&#x2F;md-icon&gt;
+      &lt;h4 md-line&gt;差旅報支&lt;&#x2F;h4&gt;
+    &lt;&#x2F;md-list-item&gt;
+  &lt;&#x2F;button&gt;
+&lt;&#x2F;md-list&gt;
+</code></pre>
+<p>開啟 <code>src\app\home\home.component.html</code>，將 <code>sidenav.close()</code> 繫結至 <strong>AsideComponent</strong> 的 <strong>menuClick</strong>。  </p>
+<pre><code>&lt;div fxFill fxLayout=&quot;column&quot; class=&quot;layout&quot;&gt;
+  &lt;div class=&quot;header&quot; fxLayout=&quot;row&quot;&gt;
+    &lt;!-- &lt;button md-icon-button (click)=&quot;sidenav.open()&quot; fxHide fxShow.xs&gt;
+      &lt;md-icon&gt;menu&lt;&#x2F;md-icon&gt;
+    &lt;&#x2F;button&gt; --&gt;
+    &lt;app-header fxFlex (sidenavClick)=&quot;sidenav.open()&quot;&gt;&lt;&#x2F;app-header&gt;
+  &lt;&#x2F;div&gt;
+  &lt;div fxFlex fxLayout=&quot;row&quot; class=&quot;main&quot;&gt;
+    &lt;div fxFlex=&quot;200px&quot; class=&quot;aside&quot; fxHide.xs&gt;
+      &lt;app-aside (menuClick)=&quot;sidenav.close()&quot;&gt;&lt;&#x2F;app-aside&gt;
+    &lt;&#x2F;div&gt;
+    &lt;md-sidenav-container fxFlex&gt;
+      &lt;md-sidenav #sidenav mode=&quot;over&quot; class=&quot;aside&quot; fxHide fxShow.xs&gt;
+        &lt;app-aside fxFlex=&quot;200px&quot; (menuClick)=&quot;sidenav.close()&quot;&gt;&lt;&#x2F;app-aside&gt;
+      &lt;&#x2F;md-sidenav&gt;
+      &lt;div fxFlex class=&quot;content&quot;&gt;
+        &lt;router-outlet&gt;&lt;&#x2F;router-outlet&gt;
+      &lt;&#x2F;div&gt;
+    &lt;&#x2F;md-sidenav-container&gt;
+  &lt;&#x2F;div&gt;
+&lt;&#x2F;div&gt;
+</code></pre>
+<p>重新執行瀏覽器查看結果，現在點選功能選單時 sidenav 就會自己藏起來，整體效果應該跟一般手機APP操作差不多了。<br><img src="/images/angular/training/event/angular_event_03.gif" alt="">  </p>
+<p><img src="/images/download.png" width="36"><a href="/uploads/first-app_2017-09-07.zip"><strong>first-app_2017-09-07.zip</strong></a>  </p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Angular/" rel="tag"># Angular</a>
+          
+            <a href="/tags/Output/" rel="tag"># Output</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+          <div class="social-like">
+            
+
+            
+              <div class="fb_like">
+                <div class="fb-like" data-layout="button_count" data-share="true"></div>
+              </div>
+            
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/angular/training/12_angular_ui_header/" rel="next" title="Angular UI：標題列">
+                <i class="fa fa-chevron-left"></i> Angular UI：標題列
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/angular/training/14_angular_ui_clarity_design_system/" rel="prev" title="Angular UI：Clarity Design System">
+                Angular UI：Clarity Design System <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Jonny Huang">
+          <p class="site-author-name" itemprop="name">Jonny Huang</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分類</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">標籤</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Jonny-Huang" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/JonnyTW" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook-official"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:jonnyhuang@outlook.com" target="_blank" title="Email">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  Email
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.facebook.com/groups/flutter.tw/" title="Flutter Taiwan" target="_blank">Flutter Taiwan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.facebook.com/groups/augularjs.tw/" title="Angular User Group Taiwan" target="_blank">Angular User Group Taiwan</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://forum.angular.tw/" title="Angular User Group Taiwan 論壇" target="_blank">Angular User Group Taiwan 論壇</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://github.com/onlinereadbook/bookangularjs" title="Angular 線上讀書會" target="_blank">Angular 線上讀書會</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#事件-EventEmitter"><span class="nav-number">1.</span> <span class="nav-text">事件 (EventEmitter)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件繫結-Event-Binding"><span class="nav-number">1.1.</span> <span class="nav-text">事件繫結 (Event Binding)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建立自訂事件"><span class="nav-number">1.2.</span> <span class="nav-text">建立自訂事件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-Jonny Huang"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jonny Huang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <link rel="stylesheet" href="/lib/prettify/skins/tomorrow-night-eighties.css" type="text/css">
+<script src="/lib/prettify/prettify.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+      $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+      prettyPrint();
+  });
+</script>
+
+</body>
+</html>
